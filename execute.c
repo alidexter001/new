@@ -11,6 +11,7 @@ void exec(char *args[], char *path)
 {
 	pid_t child_pid;
 	int status;
+	int stderr_cpy;
 
 	child_pid = fork();
 	if (child_pid == -1)
@@ -20,8 +21,14 @@ void exec(char *args[], char *path)
 	}
 	else if (child_pid == 0)
 	{
+		stderr_cpy = dup(STDERR_FILENO);
+		close(STDERR_FILENO);
+		open("/dev/null", O_WRONLY);
 		if (execve(path, args, NULL) == -1)
 		{
+			close(STDERR_FILENO);
+			dup2(stderr_cpy, STDERR_FILENO);
+			close(stderr_cpy);
 			perror("failed to execute proccess");
 			exit(EXIT_FAILURE);
 		}

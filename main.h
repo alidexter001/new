@@ -8,6 +8,7 @@
 #include <sys/types.h>
 #include <string.h>
 #include <errno.h>
+#include <fcntl.h>
 #define BUFFER 1024
 extern char **environ;
 int split_command(char *str);
