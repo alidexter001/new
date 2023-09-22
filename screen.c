@@ -20,7 +20,13 @@ int screen(char *str)
 		j++;
 		p[j] = strtok(NULL, d);
 	}
-	path = checker(p[0]);
+	if (_strchr(p[0], '/') != NULL)
+	{
+		path = p[0];
+	} else
+	{
+		path = checker(p[0]);
+	}
 	if (access(p[0], F_OK | X_OK) == 0)
 	{
 		exec(p, p[0]);

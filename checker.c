@@ -28,6 +28,15 @@ char *checker(char *arg)
 		path[i] = strtok(NULL, d);
 	}
 	result = chelper(path, i, arg);
+	if (result == NULL)
+	{
+		return(NULL);
+	}
+	else if (access(result, X_OK) != 0)
+	{
+		free(result);
+		return (NULL);
+	}
 	free(pathcopy);
 	path[20] = NULL;
 	return (result);
