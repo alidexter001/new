@@ -32,10 +32,6 @@ char *chelper(char *path[], int num_path, char *arg)
 		}
 		free(checked);
 	}
-	if (j == num_path)
-	{
-		perror(arg);
-	}
 	len1 = 0;
 	len2 = 0;
 	checked = NULL;
